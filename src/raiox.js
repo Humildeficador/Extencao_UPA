@@ -103,6 +103,7 @@
     <div class="buttons">
         <button onclick="downloadJSON()">Baixar JSON</button>
         <button onclick="downloadCSV()">Baixar CSV</button>
+        <button onclick="copiarParaWhatsapp()">Copiar para WhatsApp</button>
     </div>
 
     <h2>Resumo Geral</h2>
@@ -174,6 +175,25 @@
             a.click()
             URL.revokeObjectURL(url)
         }
+
+        function copiarParaWhatsapp() {
+    const texto = \`
+Raio-X
+Por *Paciente*:
+    *PRESENTE*: \${pacientes.presente}
+    *FALTOSOS*: \${pacientes.faltoso}
+
+Por *EXAME*:
+    *REALIZADOS*: \${exames.realizados}
+    *NÃO REALIZADOS*: \${exames.naoRealizados}
+\`.trim()
+
+    navigator.clipboard.writeText(texto).then(() => {
+        alert('Texto copiado para a área de transferência!')
+    }).catch(err => {
+        alert('Erro ao copiar: ' + err)
+    })
+}
     </script>
 </body>
 </html>
